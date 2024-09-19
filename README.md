@@ -1,4 +1,4 @@
-# Limpieza y transformación de datos (Case de estudio de Airbnb)
+# Limpieza y transformación de datos (Caso de estudio de Airbnb)
 
 Este proyecto tiene como objetivo mostrar las habilidades de SQL a la hora de realizar las tareas de limpieza y transformación de datos dentro del modelo de proceso CRISP-DM para un conjunto de datos Airbnb de la ciudad de Boston. La estructura del repositorio es
 
@@ -9,7 +9,8 @@ en dos directorios, preparacion_de_datos y comprension_de_datos con archivos con
 fases. Y el archivo de volcado de datos para recrear la base de datos en el mismo estado en que estaba en el momento del volcado.
 
 
-## Cómo utilizarlo
+## ¿Cómo utilizarlo?
+
 Para reproducir los resultados, puede cargar el archivo de volcado de datos utilizando el siguiente comando:
 
 ```bash
