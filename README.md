@@ -3,7 +3,9 @@
 Este proyecto tiene como objetivo mostrar las habilidades de SQL a la hora de realizar las tareas de limpieza y transformación de datos dentro del modelo de proceso CRISP-DM para un conjunto de datos Airbnb de la ciudad de Boston. La estructura del repositorio es
 
 datos: Contiene el conjunto de datos sin procesar en formato csv.
+
 documentacion: Contiene el informe que documenta todas las tareas realizadas.
+
 codigo: Contiene código de PostgreSQL para cada fase de CRISP-DM relacionado con la limpieza y transformación de datos. Se divide
 en dos directorios, preparacion_de_datos y comprension_de_datos con archivos con código PostgreSQL que representa la tarea realizada en esas
 fases. Y el archivo de volcado de datos para recrear la base de datos en el mismo estado en que estaba en el momento del volcado.
