@@ -12,14 +12,14 @@ fases. Y el archivo de volcado de datos para recrear la base de datos en el mism
 ## Cómo utilizarlo
 Para reproducir los resultados, puede cargar el archivo de volcado de datos utilizando el siguiente comando:
 
-'''bash
+```bash
 -- Crear nueva base de datos con el estándar PostgreSQL
 -- catálogos del sistema, sin modificar por ninguna acción anterior
 createdb -T template0 dbname
 
 -- Restaurar un fichero de volcado
 psql --set ON_ERROR_STOP=on dbname < dumpfile
-'''
+```
 
 O crear la base de datos y luego ejecutar cada script. Recordar instalar psql (16.2). [Los archivos estan almacenados en la nube](https://drive.google.com/drive/folders/16q4xgEGPM-RoK31yX8wkQwENX2kmSOQA?usp=sharing). Se
  necesita colocar los archivos descargados en el directorio/carpeta temporal de su sistema operativo o en datos. El archivo de volcado es `boston_airbnb_data_backup.sql`.
