@@ -1,198 +1,211 @@
--- Número de listados actualmente disponibles
-SELECT COUNT(DISTINCT id) AS count_listings 
-FROM listing 
-WHERE has_availability = 't' 
-ORDER BY 1 DESC; 
+--  Número de listados actualmente disponibles
+SELECT COUNT(DISTINCT id) AS count_listings
+FROM listing
+WHERE has_availability = 't'
+ORDER BY 1 DESC;
 
--- Número de vecindarios
-SELECT COUNT(DISTINCT host_neighbourhood) 
-FROM listing 
-WHERE host_neighbourhood IS NOT NULL; 
+--  Número de vecindarios
+SELECT COUNT(DISTINCT host_neighbourhood)
+FROM listing
+WHERE host_neighbourhood IS NOT NULL;
 
--- Número de anfitriones
-SELECT COUNT(DISTINCT host_id) AS count_hosts 
-FROM listing 
-WHERE has_availability = 't' AND (host_is_superhost = 't' OR host_is_superhost = 'f'); 
-
--- Número de anfitriones por tipo
-SELECT COUNT(DISTINCT host_id) FILTER (WHERE host_is_superhost = 't' AND has_availability = 't') AS count_superhosts, 
-COUNT(DISTINCT host_id) FILTER (WHERE host_is_superhost = 'f' AND has_availability = 't') AS count_regular_hosts 
-FROM listing; 
-
--- Número de anfitriones profesionales
-SELECT COUNT(*) AS count_professional_hosts, SUM(count_listings) AS count_listings_professional_hosts 
-FROM ( 
-  SELECT host_name, COUNT(DISTINCT id) AS count_listings 
-  FROM listing 
-  WHERE has_availability = 't' AND (host_is_superhost = 't' OR host_is_superhost = 'f') 
-  GROUP BY 1 
-  HAVING COUNT(DISTINCT id) > 21 
-  ORDER BY 2 DESC 
-); 
-
--- Número de anfitriones profesionales por vecindario
-SELECT host_neighbourhood,
-  COUNT(*) AS count_professional_hosts 
-FROM ( 
-  SELECT host_neighbourhood,
-    host_name,
-    COUNT(DISTINCT id) AS count_listings 
-  FROM listing 
-  WHERE has_availability = 't' AND (host_is_superhost = 't' OR host_is_superhost = 'f') 
-  GROUP BY host_neighbourhood, host_name 
-  HAVING COUNT(DISTINCT id) > 21 
-  ORDER BY 3 DESC
-) 
-  GROUP BY host_neighbourhood 
-  ORDER BY count_professional_hosts DESC; 
-
--- Número de diferentes tipos de propiedades
-SELECT COUNT(DISTINCT property_type) 
-FROM listing 
+--  Número de anfitriones
+SELECT COUNT(DISTINCT host_id) AS count_hosts
+FROM listing
 WHERE has_availability = 't'
   AND (host_is_superhost = 't'
-    OR host_is_superhost = 'f'); 
+  OR host_is_superhost = 'f');
 
--- Distribución del tipo de propiedad
+--  Número de anfitriones por tipo
+SELECT COUNT(DISTINCT host_id) FILTER (WHERE host_is_superhost = 't' AND has_availability = 't') AS count_superhosts,
+  COUNT(DISTINCT host_id) FILTER (WHERE host_is_superhost = 'f' AND has_availability = 't') AS count_regular_hosts
+FROM listing;
+
+--  Número de anfitriones profesionales
+SELECT COUNT(*) AS count_professional_hosts,
+  SUM(count_listings) AS count_listings_professional_hosts
+FROM (
+  SELECT host_name,
+	COUNT(DISTINCT id) AS count_listings
+  FROM listing
+  WHERE has_availability = 't' AND (host_is_superhost = 't'
+  OR host_is_superhost = 'f')
+  GROUP BY 1
+  HAVING COUNT(DISTINCT id) > 21
+  ORDER BY 2 DESC
+);
+
+--  Número de anfitriones profesionales por vecindario
+SELECT
+  host_neighbourhood,
+  COUNT(*) AS count_professional_hosts
+FROM (
+  SELECT
+	host_neighbourhood,
+	host_name,
+	COUNT(DISTINCT id) AS count_listings
+  FROM listing
+  WHERE has_availability = 't' AND (host_is_superhost = 't' OR host_is_superhost = 'f')
+  GROUP BY host_neighbourhood, host_name
+  HAVING COUNT(DISTINCT id) > 21
+  ORDER BY 3 DESC
+)
+GROUP BY host_neighbourhood
+ORDER BY count_professional_hosts DESC;
+
+--  Número de diferentes tipos de propiedad
+SELECT COUNT(DISTINCT property_type)
+FROM listing
+WHERE has_availability = 't'
+  AND (host_is_superhost = 't'
+	OR host_is_superhost = 'f');
+
+
+--  Distribución de tipos de propiedad
 SELECT DISTINCT property_type,
-  COUNT(property_type) 
-FROM listing 
-WHERE has_availability = 't' AND (host_is_superhost = 't' OR host_is_superhost = 'f') 
+  COUNT(property_type)
+FROM listing
+WHERE has_availability = 't' AND (host_is_superhost = 't' OR host_is_superhost = 'f')
 GROUP BY 1
-ORDER BY 2 DESC; 
+ORDER BY 2 DESC;
 
--- Distribución de superanfitriones por tipo de propiedad
+--  Distribución de superanfitriones por tipo de propiedad
 SELECT DISTINCT property_type,
-  COUNT(property_type) 
-FROM listing 
+  COUNT(property_type)
+FROM listing
 WHERE has_availability = 't' AND (host_is_superhost = 't')
 GROUP BY 1
-ORDER BY 2 DESC; 
+ORDER BY 2 DESC;
 
--- Distribución de anfitriones regulares por tipo de propiedad
+--  Distribución de anfitriones regulares por tipo de propiedad
 SELECT DISTINCT property_type,
-  COUNT(property_type) 
-FROM listing 
-WHERE has_availability = 't' AND (host_is_superhost = 'f') 
+  COUNT(property_type)
+FROM listing
+WHERE has_availability = 't' AND (host_is_superhost = 'f')
 GROUP BY 1
-ORDER BY 2 DESC; 
+ORDER BY 2 DESC;
 
--- Distribución del tipo de habitación
+--  Distribución de room_type
 SELECT DISTINCT room_type AS room_type,
-  COUNT(room_type) AS count_listings 
-FROM listing 
-WHERE has_availability = 't' AND (host_is_superhost = 't' OR host_is_superhost = 'f') 
+  COUNT(room_type) AS count_listings
+FROM listing
+WHERE has_availability = 't' AND (host_is_superhost = 't' OR host_is_superhost = 'f')
 GROUP BY 1
-ORDER BY 2 DESC; 
+ORDER BY 2 DESC;
 
--- Distribución de superanfitriones por tipo de habitación
+--  Distribución de superanfitriones por room_type
 SELECT DISTINCT room_type AS room_type,
-  COUNT(room_type) AS count_listings 
-FROM listing 
-WHERE has_availability = 't' AND (host_is_superhost = 't') 
+  COUNT(room_type) AS count_listings
+FROM listing
+WHERE has_availability = 't' AND (host_is_superhost = 't')
 GROUP BY 1
-ORDER BY 2 DESC; 
+ORDER BY 2 DESC;
 
--- Distribución de anfitriones regulares por tipo de habitación
+--  Distribución de anfitriones regulares por room_type
 SELECT DISTINCT room_type AS room_type,
-  COUNT(room_type) AS count_listings 
-FROM listing 
-WHERE has_availability = 't' AND (host_is_superhost = 'f') 
+  COUNT(room_type) AS count_listings
+FROM listing
+WHERE has_availability = 't' AND (host_is_superhost = 'f')
 GROUP BY 1
-ORDER BY 2 DESC; 
+ORDER BY 2 DESC;
 
--- Distribución de capacidades
+--  Distribución de accommodates
 SELECT DISTINCT accommodates AS accommodates,
-  COUNT(accommodates) AS count_listings 
-FROM listing 
-WHERE has_availability = 't' AND (host_is_superhost = 'f' OR host_is_superhost = 't') 
+  COUNT(accommodates)  AS count_listings
+FROM listing
+WHERE has_availability = 't' AND (host_is_superhost = 'f' OR host_is_superhost = 't')
 GROUP BY 1
-ORDER BY 2 DESC; 
+ORDER BY 2 DESC;
 
--- Distribución de capacidades (solo superanfitriones)
+-- Distribución de accommodates (solo superanfitriones)
 SELECT DISTINCT accommodates AS accommodates,
-  COUNT(accommodates) AS count_listings 
-FROM listing 
-WHERE has_availability = 't' AND (host_is_superhost = 't') 
+  COUNT(accommodates)  AS count_listings
+FROM listing
+WHERE has_availability = 't' AND (host_is_superhost = 't')
 GROUP BY 1
-ORDER BY 2 DESC; 
+ORDER BY 2 DESC;
 
--- Distribución de capacidades (solo anfitriones regulares)
+-- Distribución de accommodates (solo anfitriones regulares)
 SELECT DISTINCT accommodates AS accommodates,
-  COUNT(accommodates) AS count_listings 
-FROM listing 
-WHERE has_availability = 't' AND (host_is_superhost = 'f') 
-GROUP BY 1 ORDER BY 2 DESC; 
-
--- Distribución de baños
-SELECT DISTINCT bathrooms AS bathrooms, COUNT(bathrooms) AS count_listings 
-FROM listing 
-WHERE has_availability = 't' AND (host_is_superhost = 'f' OR host_is_superhost = 't') 
+  COUNT(accommodates)  AS count_listings
+FROM listing
+WHERE has_availability = 't' AND (host_is_superhost = 'f')
 GROUP BY 1
-ORDER BY 2 DESC; 
+ORDER BY 2 DESC;
 
--- Distribución de baños (solo superhosts)
+-- Distribución de bathrooms
 SELECT DISTINCT bathrooms AS bathrooms,
-  COUNT(bathrooms) AS count_listings 
-FROM listing  
-WHERE has_availability = 't' AND (host_is_superhost = 't')  
+  COUNT(bathrooms)  AS count_listings
+FROM listing
+WHERE has_availability = 't' AND (host_is_superhost = 'f' OR host_is_superhost = 't')
 GROUP BY 1
-ORDER BY 2 DESC; 
+ORDER BY 2 DESC;
 
--- Distribución de baños (solo anfitriones regulares)
-SELECT DISTINCT bathrooms AS bathrooms, COUNT(bathrooms) AS count_listings  
-FROM listing  
-WHERE has_availability = 't' AND (host_is_superhost = 'f')  
+-- Distribución de bathrooms (solo superanfitriones)
+SELECT DISTINCT bathrooms AS bathrooms,
+  COUNT(bathrooms)  AS count_listings
+FROM listing
+WHERE has_availability = 't' AND (host_is_superhost = 't')
 GROUP BY 1
-ORDER BY 2 DESC; 
+ORDER BY 2 DESC;
 
--- Distribución de dormitorios
-SELECT DISTINCT bedrooms AS bedrooms, COUNT(bedrooms) AS count_listings  
-FROM listing  
-WHERE has_availability = 't' AND (host_is_superhost = 'f' OR host_is_superhost = 't')  
+-- Distribución de bathrooms (solo anfitriones regulares)
+SELECT DISTINCT bathrooms AS bathrooms,
+  COUNT(bathrooms)  AS count_listings
+FROM listing
+WHERE has_availability = 't' AND (host_is_superhost = 'f')
 GROUP BY 1
-ORDER BY 2 DESC; 
+ORDER BY 2 DESC;
 
--- Distribución de dormitorios (solo superhosts)
+--  Distribución de bedrooms
 SELECT DISTINCT bedrooms AS bedrooms,
-  COUNT(bedrooms) AS count_listings  
-FROM listing  
-WHERE has_availability = 't' AND (host_is_superhost = 't')  
+  COUNT(bedrooms) AS count_listings
+FROM listing
+WHERE has_availability = 't' AND (host_is_superhost = 'f' OR host_is_superhost = 't')
 GROUP BY 1
-ORDER BY 2 DESC; 
+ORDER BY 2 DESC;
 
--- Distribución de dormitorios (solo anfitriones regulares)
+-- Distribución de bedrooms (solo superanfitriones)
 SELECT DISTINCT bedrooms AS bedrooms,
-  COUNT(bedrooms) AS count_listings  
-FROM listing  
-WHERE has_availability = 't' AND (host_is_superhost = 'f')  
+  COUNT(bedrooms) AS count_listings
+FROM listing
+WHERE has_availability = 't' AND (host_is_superhost = 't')
 GROUP BY 1
-ORDER BY 2 DESC; 
+ORDER BY 2 DESC;
 
--- Distribución de camas
+-- Distribución de bedrooms (solo anfitriones regulares)
+SELECT DISTINCT bedrooms AS bedrooms,
+  COUNT(bedrooms)  AS count_listings
+FROM listing
+WHERE has_availability = 't' AND (host_is_superhost = 'f')
+GROUP BY 1
+ORDER BY 2 DESC;
+
+-- Distribución de beds
 SELECT DISTINCT beds AS beds,
-  COUNT(beds) AS count_listings  
-FROM listing  
-WHERE has_availability = 't' AND (host_is_superhost = 'f' OR host_is_superhost = 't')  
+  COUNT(beds) AS count_listings
+FROM listing
+WHERE has_availability = 't' AND (host_is_superhost = 'f' OR host_is_superhost = 't')
 GROUP BY 1
-ORDER BY 2 DESC; 
+ORDER BY 2 DESC;
 
--- Distribución de camas (solo superanfitriones)
-SELECT DISTINCT beds AS beds, COUNT(beds) AS count_listings  
-FROM listing  
-WHERE has_availability = 't' AND (host_is_superhost = 't')  
-GROUP BY 1
-ORDER BY 2 DESC; 
-
--- Distribución de camas (solo anfitriones regulares)
+-- Distribución de beds (solo superanfitriones)
 SELECT DISTINCT beds AS beds,
-  COUNT(beds) AS count_listings  
-FROM listing  
-WHERE has_availability = 't' AND (host_is_superhost = 'f')  
+  COUNT(beds) AS count_listings
+FROM listing
+WHERE has_availability = 't' AND (host_is_superhost = 't')
 GROUP BY 1
-ORDER BY 2 DESC; 
+ORDER BY 2 DESC;
 
---  Distribución de amenidades
+-- Distribución de beds (solo anfitriones regulares)
+SELECT DISTINCT beds AS beds,
+  COUNT(beds)  AS count_listings
+FROM listing
+WHERE has_availability = 't' AND (host_is_superhost = 'f')
+GROUP BY 1
+ORDER BY 2 DESC;
+
+--  Distribución de amenities
 SELECT amenity, COUNT(*)
 FROM (
 	SELECT UNNEST(REPLACE(REPLACE(amenities, '[', '{'), ']', '}')::TEXT[]) AS amenity
@@ -204,7 +217,7 @@ FROM (
 GROUP BY amenity
 ORDER BY COUNT(*) DESC;
 
---  Distribución de amenidades (solo superanfitriones)
+--  Distribución de amenities (solo superanfitriones)
 SELECT amenity, COUNT(*)
 FROM (
 	SELECT UNNEST(REPLACE(REPLACE(amenities, '[', '{'), ']', '}')::TEXT[]) AS amenity
@@ -215,7 +228,7 @@ FROM (
 GROUP BY amenity
 ORDER BY COUNT(*) DESC;
 
---  Distribución de amenidades (solo anfitriones regulares)
+--  Distribución de amenities (solo anfitriones regulares)
 SELECT amenity, COUNT(*)
 FROM (
 	SELECT UNNEST(REPLACE(REPLACE(amenities, '[', '{'), ']', '}')::TEXT[]) AS amenity
@@ -226,10 +239,10 @@ FROM (
 GROUP BY amenity
 ORDER BY COUNT(*) DESC;
 
--- CALCULAR ESTADÍSTICAS RESUMIDAS DE UBICACIÓN Y DISPERSIÓN
+-- COMPUTAR ESTADÍSTICAS RESUMEN DE UBICACIÓN Y DISPERSIÓN
 
--- Calcular estadísticas resumidas de ubicación y dispersión para number_of_reviews
- SELECT
+-- Calcular estadísticas resumen de ubicación y dispersión para number_of_reviews
+SELECT
   MIN(number_of_reviews) AS min_number_of_reviews,
   PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY number_of_reviews) AS Q1_number_of_reviews,
   MODE() WITHIN GROUP(ORDER BY number_of_reviews) AS mode_number_of_reviews,
@@ -243,7 +256,7 @@ FROM listing
 WHERE has_availability = 't'
   AND (host_is_superhost = 't' OR host_is_superhost = 'f');
 
--- Calcular estadísticas resumidas de ubicación y dispersión para number_of_reviews en superanfitriones
+-- Calcular estadísticas resumen de ubicación y dispersión para number_of_reviews en superanfitriones
 SELECT
   MIN(number_of_reviews) AS min_number_of_reviews,
   PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY number_of_reviews) AS Q1_number_of_reviews,
@@ -258,7 +271,7 @@ FROM listing
 WHERE has_availability = 't'
   AND (host_is_superhost = 't');
 
--- Calcular estadísticas resumidas de ubicación y dispersión para number_of_reviews en anfitriones regulares
+-- Calcular estadísticas resumen de ubicación y dispersión para number_of_reviews en anfitriones regulares
 SELECT
   MIN(number_of_reviews) AS min_number_of_reviews,
   PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY number_of_reviews) AS Q1_number_of_reviews,
@@ -273,7 +286,7 @@ FROM listing
 WHERE has_availability = 't'
   AND (host_is_superhost = 'f');
 
--- Calcular estadísticas resumidas de ubicación y dispersión para number_of_reviews_ltm
+--  Calcular estadísticas resumen de ubicación y dispersión para number_of_reviews_ltm
 SELECT
   MIN(number_of_reviews_ltm) AS min_number_of_reviews_ltm,
   PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY number_of_reviews_ltm) AS Q1_number_of_reviews_ltm,
@@ -288,7 +301,7 @@ FROM listing
 WHERE has_availability = 't'
   AND (host_is_superhost = 't' OR host_is_superhost = 'f');
 
--- Calcular estadísticas resumidas de ubicación y dispersión para number_of_reviews_ltm en superanfitriones
+--  Calcular estadísticas resumen de ubicación y dispersión para number_of_reviews_ltm en superanfitriones
 SELECT
   MIN(number_of_reviews_ltm) AS min_number_of_reviews_ltm,
   PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY number_of_reviews_ltm) AS Q1_number_of_reviews_ltm,
@@ -303,7 +316,7 @@ FROM listing
 WHERE has_availability = 't'
   AND (host_is_superhost = 't');
 
---  Calcular estadísticas resumidas de ubicación y dispersión para number_of_reviews_ltm en anfitriones regulares
+--  Calcular estadísticas resumen de ubicación y dispersión para number_of_reviews_ltm en anfitriones regulares
 SELECT
   MIN(number_of_reviews_ltm) AS min_number_of_reviews_ltm,
   PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY number_of_reviews_ltm) AS Q1_number_of_reviews_ltm,
@@ -318,7 +331,7 @@ FROM listing
 WHERE has_availability = 't'
   AND (host_is_superhost = 'f');
 
- -- Calcular estadísticas resumidas de ubicación y dispersión para number_of_reviews_l30d
+--  Calcular estadísticas resumen de ubicación y dispersión para number_of_reviews_l30d
 SELECT
   MIN(number_of_reviews_l30d) AS min_number_of_reviews_l30d,
   PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY number_of_reviews_l30d) AS Q1_number_of_reviews_l30d,
@@ -332,7 +345,7 @@ SELECT
 FROM listing
 WHERE has_availability = 't';
 
- -- Calcular estadísticas resumidas de ubicación y dispersión para number_of_reviews_l30d en superanfitriones
+--  Calcular estadísticas resumen de ubicación y dispersión para number_of_reviews_l30d en superanfitriones
 SELECT
   MIN(number_of_reviews_l30d) AS min_number_of_reviews_l30d,
   PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY number_of_reviews_l30d) AS Q1_number_of_reviews_l30d,
@@ -347,7 +360,7 @@ FROM listing
 WHERE has_availability = 't'
   AND (host_is_superhost = 't');
 
---  Calcular estadísticas resumidas de ubicación y dispersión para number_of_reviews_l30d en anfitriones regulares
+--  Calcular estadísticas resumen de ubicación y dispersión para number_of_reviews_l30d en anfitriones regulares
 SELECT
   MIN(number_of_reviews_l30d) AS min_number_of_reviews_l30d,
   PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY number_of_reviews_l30d) AS Q1_number_of_reviews_l30d,
@@ -362,7 +375,7 @@ FROM listing
 WHERE has_availability = 't'
   AND (host_is_superhost = 'f');
 
---  Calcular estadísticas resumidas de ubicación y dispersión para review_scores_rating
+--  Calcular estadísticas resumen de ubicación y dispersión para review_scores_rating
 SELECT
   MIN(review_scores_rating) AS min_review_scores_rating,
   PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY review_scores_rating) AS Q1_review_scores_rating,
@@ -377,7 +390,7 @@ FROM listing
 WHERE has_availability = 't'
   AND (host_is_superhost = 't' OR host_is_superhost = 'f');
 
---  Calcular estadísticas resumidas de ubicación y dispersión para review_scores_rating en superanfitriones
+--  Calcular estadísticas resumen de ubicación y dispersión para review_scores_rating en superanfitriones
 SELECT
   MIN(review_scores_rating) AS min_review_scores_rating,
   PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY review_scores_rating) AS Q1_review_scores_rating,
@@ -392,7 +405,7 @@ FROM listing
 WHERE has_availability = 't'
   AND (host_is_superhost = 't');
 
---  Calcular estadísticas resumidas de ubicación y dispersión para review_scores_rating en anfitriones regulares
+--  Calcular estadísticas resumen de ubicación y dispersión para review_scores_rating en anfitriones regulares
 SELECT
   MIN(review_scores_rating) AS min_review_scores_rating,
   PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY review_scores_rating) AS Q1_review_scores_rating,
@@ -407,7 +420,7 @@ FROM listing
 WHERE has_availability = 't'
   AND (host_is_superhost = 'f');
 
---  Calcular estadísticas resumidas de ubicación y dispersión para host_response_rate
+--  Calcular estadísticas resumen de ubicación y dispersión para host_response_rate
 SELECT
   MIN(CASE WHEN host_response_rate = 'N/A' THEN NULL ELSE CAST(REPLACE(host_response_rate, '%', '') AS INTEGER) END) AS min_host_response_rate,
   PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY CASE WHEN host_response_rate = 'N/A' THEN NULL ELSE CAST(REPLACE(host_response_rate, '%', '') AS INTEGER) END) AS Q1_host_response_rate,
@@ -423,7 +436,7 @@ FROM listing
 WHERE has_availability = 't'
   AND (host_is_superhost = 't' OR host_is_superhost = 'f');
 
---  Calcular estadísticas resumidas de ubicación y dispersión para host_response_rate en superanfitriones
+--  Calcular estadísticas resumen de ubicación y dispersión para host_response_rate en superanfitriones
 SELECT
   MIN(CASE WHEN host_response_rate = 'N/A' THEN NULL ELSE CAST(REPLACE(host_response_rate, '%', '') AS INTEGER) END) AS min_host_response_rate,
   PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY CASE WHEN host_response_rate = 'N/A' THEN NULL ELSE CAST(REPLACE(host_response_rate, '%', '') AS INTEGER) END) AS Q1_host_response_rate,
@@ -439,7 +452,7 @@ FROM listing
 WHERE has_availability = 't'
   AND (host_is_superhost = 't');
 
---  Calcular estadísticas resumidas de ubicación y dispersión para host_response_rate en anfitriones regulares
+--  Calcular estadísticas resumen de ubicación y dispersión para host_response_rate en anfitriones regulares
 SELECT
   MIN(CASE WHEN host_response_rate = 'N/A' THEN NULL ELSE CAST(REPLACE(host_response_rate, '%', '') AS INTEGER) END) AS min_host_response_rate,
   PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY CASE WHEN host_response_rate = 'N/A' THEN NULL ELSE CAST(REPLACE(host_response_rate, '%', '') AS INTEGER) END) AS Q1_host_response_rate,
@@ -455,7 +468,7 @@ FROM listing
 WHERE has_availability = 't'
   AND (host_is_superhost = 'f');
 
---  Calcular estadísticas resumidas de ubicación y dispersión para precio (tarifa por noche)
+--  Calcular estadísticas resumen de ubicación y dispersión para price (tarifa nocturna)
 SELECT
   MIN(CAST(REPLACE(SUBSTR(price, 2), ',', '') AS FLOAT8)) AS min_price,
   PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY CAST(REPLACE(SUBSTR(price, 2), ',', '') AS FLOAT8)) AS Q1_price,
@@ -470,7 +483,7 @@ FROM listing
 WHERE has_availability = 't'
   AND (host_is_superhost = 't' OR host_is_superhost = 'f');
 
---  Calcular estadísticas resumidas de ubicación y dispersión para precio (tarifa por noche) en superanfitriones
+--  Calcular estadísticas resumen de ubicación y dispersión para price (tarifa nocturna) en superanfitriones
 SELECT
   MIN(CAST(REPLACE(SUBSTR(price, 2), ',', '') AS FLOAT8)) AS min_price,
   PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY CAST(REPLACE(SUBSTR(price, 2), ',', '') AS FLOAT8)) AS Q1_price,
@@ -485,7 +498,7 @@ FROM listing
 WHERE has_availability = 't'
   AND (host_is_superhost = 't');
 
---  Calcular estadísticas resumidas de ubicación y dispersión para precio (tarifa por noche) en anfitriones regulares
+--  Calcular estadísticas resumen de ubicación y dispersión para price (tarifa nocturna) en anfitriones regulares
 SELECT
   MIN(CAST(REPLACE(SUBSTR(price, 2), ',', '') AS FLOAT8)) AS min_price,
   PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY CAST(REPLACE(SUBSTR(price, 2), ',', '') AS FLOAT8)) AS Q1_price,
@@ -501,7 +514,7 @@ WHERE has_availability = 't'
   AND (host_is_superhost = 'f');
 
 
--- CALCULAR EL COEFICIENTE DE CORRELACIÓN ENTRE EL PRECIO Y LAS VARIABLES CUANTITATIVAS
+-- CALCULAR COEFICIENTE DE CORRELACIÓN ENTRE PRECIO Y VARIABLES CUANTITATIVAS
 
 --  Calcular coeficiente de correlación entre price y host_response_rate
 SELECT CORR(CAST(REPLACE(SUBSTR(price, 2), ',', '') AS FLOAT8), CASE WHEN host_response_rate = 'N/A' THEN NULL ELSE CAST(REPLACE(host_response_rate, '%', '') AS INTEGER) / 100 END) AS corr_price_host_response_rate
@@ -725,9 +738,9 @@ FROM listing
 WHERE has_availability = 't'
   AND (host_is_superhost = 't' OR host_is_superhost = 'f');
 
---  REALIZAR ANÁLISIS DE CORRELACIÓN CON VARIABLES CUALITATIVAS
+--  REALIZAR ANÁLISIS DE CORRELACIÓN A VARIABLES CUALITATIVAS
 
---  Calcular el análisis de correlación entre price y host_response_time
+--  Calcular análisis de correlación entre price y host_response_time
 SELECT
 	'a few days or more' AS variable,
 	corr(price_formatted, host_response_time_a_few_days_or_more) AS correlation
@@ -775,7 +788,7 @@ FROM (
 ) subquery;
 
 
---  Calcular el análisis de correlación entre price y host_is_superhost
+--  Calcular análisis de correlación entre price y host_is_superhost
 SELECT
 	't' AS variable,
 	corr(price_formatted, host_is_superhost_t) AS correlation
@@ -798,7 +811,7 @@ FROM (
 	FROM listing
 ) subquery;
 
---  Calcular el análisis de correlación entre price y host_verifications
+--  Calcular análisis de correlación entre price y host_verifications
 SELECT
 	'email' AS variable,
 	corr(price_formatted, host_verifications_email) AS correlation
@@ -834,7 +847,7 @@ FROM (
 	FROM listing
 ) subquery;
 
---  Calcular el análisis de correlación entre price y has_availability
+--  Calcular análisis de correlación entre price y has_availability
 SELECT
 	't' AS variable,
 	corr(price_formatted, has_availability_t) AS correlation
@@ -857,7 +870,7 @@ FROM (
 	FROM listing
 ) subquery;
 --
--- Calcular el análisis de correlación entre price y instant_bookable
+-- Calcular análisis de correlación entre price y instant_bookable
 SELECT
 	't' AS variable,
 	corr(price_formatted, instant_bookable_t) AS correlation
