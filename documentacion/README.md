@@ -61,7 +61,8 @@ La metodología del proyecto se basa en CRISP-DM (Proceso Estándar Interindustr
 ### **Recolección de datos inicial**
 
 
-Recopilé los datos de Inside Airbnb [2], un proyecto con una misión que proporciona información sobre los anuncios de Airbnb para los próximos 12 meses, que se actualiza trimestralmente. Elegí específicamente datos de Boston, MA, los descargué manualmente y los guardé localmente.
+Recopilé los datos de Inside Airbnb [2], un proyecto con una misión que proporciona información sobre los anuncios de Airbnb para los próximos 12 meses, 
+que se actualiza trimestralmente. Elegí específicamente datos de Boston, MA, los descargué manualmente y los guardé localmente.
 
 
 <a id='descripcion-de-los-datos'></a>
@@ -72,14 +73,20 @@ Los datos de Airbnb de Boston están almacenados en formato .csv. Contiene 7 arc
  su disponibilidad en los próximos 12 meses (`calendar.csv`) y las reseñas pasadas (`reviews.csv`). Los siguientes tres
  representan una versión resumida de los datos detallados. Los dos restantes representan información geográfica para los
  vecindarios (`neighbourhoods.csv`, `neighbourhoods.geojson`). Selecciono solo los primeros tres archivos que 
-contienen datos que se alinean con el objetivo del proyecto. Los archivos tienen un número variable de campos y 
+contienen datos que se alinean con el objetivo del proyecto.
+
+
+ Los archivos tienen un número variable de campos y 
 observaciones. `listings.csv` tiene 75 campos y 4,261 observaciones. `calendar.csv` contiene 7 campos
- y 1,554,256 observaciones. Y el archivo `reviews.csv` contiene 6 campos y 186,496 observaciones. El archivo `listing.csv`
- contiene 4 tipos diferentes de información. El primer tipo está relacionado con la singularidad de los 
+ y 1,554,256 observaciones. Y el archivo `reviews.csv` contiene 6 campos y 186,496 observaciones.
+
+
+ El archivo `listing.csv`  contiene 4 tipos diferentes de información. El primer tipo está relacionado con la singularidad de los 
 datos (`listing_id`). El segundo tipo está relacionado con la enumeración de métricas clave de rendimiento (KPI), 
 con columnas como `number_of_reviews`, `number_of_reviews_ltm`, y así sucesivamente. El tercer tipo contiene información
  del anfitrión con columnas como `host_id`, `host_url` y demás. El último tipo de información está relacionado con la
  propiedad, como `bathrooms`, `bedrooms` y otros. La tabla a continuación proporciona información detallada sobre cada columna.
+
 
 | Atributo | Descripción |
 |-------------------------|-----------------------------------------------------------------------------------------------|
