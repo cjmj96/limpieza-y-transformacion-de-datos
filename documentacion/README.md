@@ -6,7 +6,6 @@
 
 ## **Tabla de contenido**
 
-- [Resumen](#resumen)
 - [Introducción](#introduccion)
 - [Comprensión de datos](#comprension-de-datos)
     - [Recolección inicial de datos](#recoleccion-de-datos-inicial)
@@ -20,27 +19,6 @@
     - [Construcción de datos](#construccion-de-datos)
 - [Conclusión](#conclusion)
 - [Referencias](#referencias)
-
-<a id='resumen'></a>
-## **Resumen**
-
-### **Objetivo**
-
-Producir datos de alta calidad para anuncios de Airbnb en Boston, MA. Estos datos podrían ayudar
- a un analista de datos a comprender el actual mercado de alquileres a corto plazo, proporcionando
- información que guiará la expansión de una empresa inmobiliaria o de un particular.
-
-
-### **Proceso**
-
-
-Almacené los datos localmente, luego creé una base de datos PostgreSQL con múltiples tablas que representan diferentes elementos de los datos. Finalmente, apliqué varias técnicas y métodos para asegurar la calidad de los datos.
-
-### **Aspectos destacados**
-
-Todo el proyecto se lleva a cabo utilizando PostgreSQL, debido a sus capacidades.
-
-La base de datos ha sido creada mediante el uso de scripts SQL que representan tareas de CRISP-DM. Esto favorece la reproducibilidad.
 
 
 <a id='introduccion'></a>
@@ -81,7 +59,7 @@ observaciones. `listings.csv` tiene 75 campos y 4,261 observaciones. `calendar.c
  y 1,554,256 observaciones. Y el archivo `reviews.csv` contiene 6 campos y 186,496 observaciones.
 
 
- El archivo `listing.csv`  contiene 4 tipos diferentes de información. El primer tipo está relacionado con la singularidad de los 
+ El archivo `listing.csv`  contiene 4 tipos diferentes de información. El primer tipo está relacionado con la unicidad de los 
 datos (`listing_id`). El segundo tipo está relacionado con la enumeración de métricas clave de rendimiento (KPI), 
 con columnas como `number_of_reviews`, `number_of_reviews_ltm`, y así sucesivamente. El tercer tipo contiene información
  del anfitrión con columnas como `host_id`, `host_url` y demás. El último tipo de información está relacionado con la
@@ -141,11 +119,11 @@ con columnas como `number_of_reviews`, `number_of_reviews_ltm`, y así sucesivam
 | maximum_nights_avg_ntm | Promedio máximo del número de noches reservadas durante el último año |
 | calendar_updated | Marca de tiempo que indica la última actualización del calendario del anuncio |
 | has_availability | Booleano que indica si actualmente hay disponibilidad en el anuncio |
-| availability_30 | Porcentaje de disponibilidad para los próximos 30 días |
-| availability_60 | Porcentaje de disponibilidad para los próximos 60 días |
-| availability_90 | Porcentaje de disponibilidad para los próximos 90 días |
-| availability_365 | Porcentaje de disponibilidad para los próximos 365 días |
-| calendar_last_scraped | Marca de tiempo que indica la última vez que se extrajo el calendario del anuncio |
+| availability_30 | Número de días disponibles en los próximos 30 días |
+| availability_60 | Número de días disponibles en los próximos 60 días |
+| availability_90 | Número de días disponibles en los próximos 90 días |
+| availability_365 | Número de días disponibles en los próximos 365 días |
+| calendar_last_scraped | Marca de tiempo que indica la última vez que se extrajo información del anuncio |
 | number_of_reviews | Número total de reseñas dejadas para el anuncio |
 | number_of_reviews_ltm | Número de reseñas dejadas para el anuncio durante los últimos 12 meses |
 | number_of_reviews_l30d | Número de reseñas dejadas para el anuncio durante los últimos 30 días |
@@ -161,9 +139,9 @@ con columnas como `number_of_reviews`, `number_of_reviews_ltm`, y así sucesivam
 | license | Tipo de licencia para el anuncio|
 | instant_bookable | Booleano que indica si el anuncio permite reservas instantáneas|
 | calculated_host_listings_count | Número total calculado de anuncios hospedados por el anfitrión en todas las plataformas|
-| calculated_host_listings_count_entire_homes |		Calculado número total de casas enteras hospedadas por el anfitrión|
-|calculated_host_listings_count_private_rooms |		Calculado número total habitaciones privadas hospedadas por el anfitrión|
-|calculated_host_listings_count_shared_rooms |		Calculado número total habitaciones compartidas hospedadas por el anfitrión|
+| calculated_host_listings_count_entire_homes |		Número total calculado de casas enteras hospedadas por el anfitrión|
+|calculated_host_listings_count_private_rooms |		Número total calculado de habitaciones privadas hospedadas por el anfitrión|
+|calculated_host_listings_count_shared_rooms |		Número total calculado habitaciones compartidas hospedadas por el anfitrión|
 |reviews_per_month |	Promedio mensual número total reseñas recibidas|
 
 El archivo `calendar.csv` contiene 2 tipos diferentes de información. El primer tipo está relacionado con fechas. El segundo tipo
@@ -203,7 +181,7 @@ Los datos de la fuente se organizaron en tablas dentro de una base de datos robu
 
 ### **Exploración de datos**
 
-El conjunto de datos tiene 4102 anuncios activos a partir del 24 de marzo de 2024. Están distribuidos en 121 barrios y pertenecen a 1,228 anfitriones. De estos anfitriones, 522 (42.50%) están clasificados como superanfitriones, mientras que 706 (57.49%) son anfitriones regulares. Es importante señalar que un factor a considerar al evaluar una propiedad para inversión en alquiler a corto plazo es evitar ubicaciones con muchos anfitriones profesionales. Hay 28 de ellos que representan el 2.04% de todos los anfitriones, y poseen el 42.63% de los anuncios.
+El conjunto de datos tiene 4102 anuncios activos hasta del 24 de marzo de 2024. Están distribuidos en 121 barrios y pertenecen a 1,228 anfitriones. De estos anfitriones, 522 (42.50%) están clasificados como superanfitriones, mientras que 706 (57.49%) son anfitriones regulares. Es importante señalar que un factor a considerar al evaluar una propiedad para inversión en alquiler a corto plazo es evitar ubicaciones con muchos anfitriones profesionales. Hay 28 de ellos que representan el 2.04% de todos los anfitriones, y poseen el 42.63% de los anuncios.
 
 Si analizamos más a fondo cómo se configuran las propiedades, la mayoría de ellas son unidades de alquiler completas (49.26%). Estos alojamientos en su mayoría son para dos huéspedes (42.05%), tienen un baño (61.18%) y una cama (49.24%). Las cinco comodidades más populares, presentes en más del 90% de los anuncios, incluyen alarmas de humo, alarmas de monóxido de carbono, Wifi, artículos esenciales y agua caliente.
 
@@ -400,18 +378,18 @@ Todos los errores presentes en los datos fueron corregidos con éxito para garan
  de los datos. La metodología seguida es la propuesta por Ilyas et al. [6]. Esta metodología asegura
  que las dimensiones relevantes de los datos cumplan con los requisitos de nuestra situación
  específica. El proceso de selección de dimensiones se realizó utilizando el enfoque DAMA. Las 
-dimensiones son las siguientes: moneda, validez, precisión, unicidad y completitud.  Estos están
+dimensiones son las siguientes: actualidad, validez, precisión, unicidad y completitud.  Estos están
  listados por orden de prioridad para alcanzar nuestro objetivo y su relación costo-beneficio 
 en los pasos de detección y reparación de errores [7].
 
 
-La técnica utilizada en la verificación de las dimensiones de la moneda fue la limpieza de datos
+La técnica utilizada en la verificación de las dimensiones de actualidad fue la limpieza de datos
  basada en reglas. La columna `date` en la tabla de calendario y reseñas fue crucial para hacer esto.
 
 La técnica utilizada en la verificación de dimensiones sobre la validez y precisión de los datos fue
- basada en reglas y detección de valores atípicos. El más afectado fue el cuadro de listados, que contenía 
-un 56.77% menos de observaciones, sumando un total de 1,842. En esta tabla en particular, lo que se ajustó fue
- el `host_response_time`, reemplazando los valores 'N/A' por 'NULL'. Esto también ocurre en relación con
+ basada en reglas y detección de valores atípicos. El más afectado fue la tabla `listing`, que ahora se redujo un 
+56.77% menos de observaciones, sumando un total de 1,842. En esta tabla en particular, lo que se ajustó fue
+ el `host_response_time`, reemplazando los valores 'N/A' por 'NULL'. Esto también ocurre en
  la columna `host_neighbourhood`, donde existían 124 vecindarios diferentes y, sin embargo, solo hay 24. La 
 identificación de vecindarios utilizó las coordenadas espaciales aproximadas de los datos de listado [9]. Las 
 columnas restantes en esta tabla y otras columnas en las tablas restantes utilizaron técnicas simples basadas
@@ -432,7 +410,7 @@ trata `host_is_superhost` con un análisis de casos completos debido a la baja c
 <a id='construccion-de-datos'></a>
 ### **Construcción de datos**
 
-Creo una nueva columna llamada `total_potential_revenue` derivada de la cantidad de noches del próximo
+Cre una nueva columna llamada `total_potential_revenue` derivada de la cantidad de noches del próximo
  año (tabla de calendario) y el precio por noche. (listing table). Otros indicadores clave de rendimiento (KPI)
  como la tarifa diaria promedio (ADR) y la tasa de ocupación no se calcularon debido a limitaciones de datos.
 

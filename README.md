@@ -1,7 +1,11 @@
 # Limpieza y transformación de datos (Caso de estudio de Airbnb)
 
+![airbnb-logo](airbnb-logo.png)
+
+<a href="https://www.flaticon.com/free-icons/airbnb" title="iconos de airbnb">Iconos de Airbnb creados por riajulislam - Flaticon
+
 Este proyecto tiene como objetivo realizar las tareas de limpieza y transformación de datos para un conjunto de datos de Airbnb de la ciudad de Boston.  Estas tareas aseguran que los
-datos usados para la toma de decisiones es preciso, confiable y accionable. 
+datos usados para la toma de decisiones es preciso, confiable y accionable. El informe detallado esta localizado en `documentacion`.
 
 ## Resumen de descubrimientos
 
