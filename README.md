@@ -22,16 +22,16 @@ reducción en el conjunto de datos (tabla  `listing`) de un 2%, ahora conteniend
 ## Recomendaciones y pasos futuros
 
 En función de los conocimientos adquiridos al descubrir datos faltantes e inconsistentes en el conjunto de datos de Airbnb, a continuación se ofrecen algunas recomendaciones prácticas:
-- Implementar un protocolo de entrada de datos estandarizado: para evitar inconsistencias futuras, establecer pautas claras para la entrada de datos. Esto puede ayudar a mantener
+- Implementar un protocolo de entrada de datos estandarizado: Para evitar inconsistencias futuras, establecer pautas claras para la entrada de datos. Esto puede ayudar a mantener
  la integridad de los datos y facilitar el análisis.
 - Auditorías de datos periódicas: Programar auditorías periódicas del conjunto de datos para identificar y abordar los datos faltantes o inconsistentes de inmediato. Esto podría
  implicar secuencias de comandos automatizadas que marquen anomalías o desviaciones de los patrones esperados, lo que permite tomar medidas correctivas más rápidas.
-- Métodos mejorados de recopilación de datos: si ciertos campos muestran constantemente datos faltantes (por ejemplo, información del anfitrión), considerar revisar el proceso
+- Métodos mejorados de recopilación de datos: Si ciertos campos muestran constantemente datos faltantes (por ejemplo, información del anfitrión), considerar revisar el proceso
  de recopilación de datos. Por ejemplo, implemente campos obligatorios durante la creación de anuncios en la plataforma para garantizar que se capture información crítica.
-- Informes de calidad de datos: crear un dashboard o informe que resuma periódicamente las métricas de calidad de los datos, como el porcentaje de valores faltantes, las
+- Informes de calidad de datos: Crear un dashboard o informe que resuma periódicamente las métricas de calidad de los datos, como el porcentaje de valores faltantes, las
  inconsistencias identificadas y las acciones tomadas para resolver estos problemas. Esta transparencia puede ayudar a las partes interesadas a comprender el estado
  del conjunto de datos y priorizar las áreas que necesitan atención.
-- Capacitación para anfitriones: brindar capacitación o recursos para anfitriones sobre cómo completar sus anuncios con precisión. Esto podría incluir tutoriales sobre
+- Capacitación para anfitriones: Brindar capacitación o recursos para anfitriones sobre cómo completar sus anuncios con precisión. Esto podría incluir tutoriales sobre
  las mejores prácticas para ingresar información sobre servicios, precios y disponibilidad, lo que puede reducir los errores y mejorar la calidad general de los datos.
 
 Al implementar estas recomendaciones, puede mejorar significativamente la calidad de su conjunto de datos de Airbnb, lo que genera análisis más confiables y decisiones comerciales mejor informadas.
