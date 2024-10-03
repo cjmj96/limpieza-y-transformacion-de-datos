@@ -28,10 +28,10 @@ En función de los conocimientos adquiridos al descubrir datos faltantes e incon
  implicar secuencias de comandos automatizadas que marquen anomalías o desviaciones de los patrones esperados, lo que permite tomar medidas correctivas más rápidas.
 - Métodos mejorados de recopilación de datos: si ciertos campos muestran constantemente datos faltantes (por ejemplo, información del anfitrión), considerar revisar el proceso
  de recopilación de datos. Por ejemplo, implemente campos obligatorios durante la creación de anuncios en la plataforma para garantizar que se capture información crítica.
-- Informes de calidad de datos: cree un dashboard o informe que resuma periódicamente las métricas de calidad de los datos, como el porcentaje de valores faltantes, las
+- Informes de calidad de datos: crear un dashboard o informe que resuma periódicamente las métricas de calidad de los datos, como el porcentaje de valores faltantes, las
  inconsistencias identificadas y las acciones tomadas para resolver estos problemas. Esta transparencia puede ayudar a las partes interesadas a comprender el estado
  del conjunto de datos y priorizar las áreas que necesitan atención.
-- Capacitación para anfitriones: brinde capacitación o recursos para anfitriones sobre cómo completar sus anuncios con precisión. Esto podría incluir tutoriales sobre
+- Capacitación para anfitriones: brindar capacitación o recursos para anfitriones sobre cómo completar sus anuncios con precisión. Esto podría incluir tutoriales sobre
  las mejores prácticas para ingresar información sobre servicios, precios y disponibilidad, lo que puede reducir los errores y mejorar la calidad general de los datos.
 
 Al implementar estas recomendaciones, puede mejorar significativamente la calidad de su conjunto de datos de Airbnb, lo que genera análisis más confiables y decisiones comerciales mejor informadas.
