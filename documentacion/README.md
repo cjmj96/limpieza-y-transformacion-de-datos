@@ -429,19 +429,18 @@ Nuestros datos cumplen con los requisitos expresados como dimensiones de datos, 
 [1] N. Hotz, “What is CRISP DM?,” Data Science Project Management, Jan. 19, 2023. https://www.datascience-pm.com/crisp-dm-2/ (accessed May 14, 2024).
 ‌
 
-[2] Airbnb, “Inside Airbnb” Inside Airbnb. https://insideairbnb.com/ (accessed May 14, 2024).
+[2] Airbnb, “Inside Airbnb” Inside Airbnb. https://insideairbnb.com/ (Accedido: 14 de mayo de 2024).
 
-[3] Airdna, “How to find a good short-term rental investment location | AirDNA,” airdna. https://www.airdna.co/guides/find-good-short-term-rental-locations (accessed May 30, 2024).
+[3] Airdna, “How to find a good short-term rental investment location | AirDNA,” airdna. https://www.airdna.co/guides/find-good-short-term-rental-locations (Accedido: 30 de mayo de 2024).
 
-[4] Airdna, "Airbnb Superhost: How to Become One in 2024”, AirDNA - Short-Term Vacation Rental Data and Analytics, Apr. 7, 2024. https://www.airdna.co/blog/airbnb_superhost_status (accessed May 30, 2024).
+[4] Airdna, "Airbnb Superhost: How to Become One in 2024”, AirDNA - Short-Term Vacation Rental Data and Analytics, Apr. 7, 2024. https://www.airdna.co/blog/airbnb_superhost_status (Accedido: 30 de mayo de 2024).
 
-[5] Airbnb, “How to become a Superhost - Airbnb Help Center,” Airbnb. https://www.airbnb.com/help/article/829 (accessed May 30, 2024)
+[5] Airbnb, “How to become a Superhost - Airbnb Help Center,” Airbnb. https://www.airbnb.com/help/article/829 (Accedido: 30 de mayo de 2024)
 
 [6] I. F. Ilyas and X. Chu, “Data Cleaning,” Jul. 2019, doi: https://doi.org/10.1145/3310205.
 
-[7] DAMA, “Dimensions of Data Quality | Stichting DAMA NL.” https://dama-nl.org/dimensions-of-data-quality-en/ (accessed June 9, 2024)
+[7] DAMA, “Dimensions of Data Quality | Stichting DAMA NL.” https://dama-nl.org/dimensions-of-data-quality-en/ (Accedido: 9 de junio de 2024)
 
-[8] City of Boston, "Neighborhoods," boston.gov, Oct. 13, 2017. https://www.boston.gov/neighborhoods (accessed June 18, 2024)
+[8] City of Boston, "Neighborhoods," boston.gov, Oct. 13, 2017. https://www.boston.gov/neighborhoods (Accedido: 18 de junio de 2024)
 
-[9] Inside Airbnb, “Data Assumptions,” Inside Airbnb. https://insideairbnb.com/data-assumptions/ (accessed June 19, 2024).
-
+[9] Inside Airbnb, “Data Assumptions,” Inside Airbnb. https://insideairbnb.com/data-assumptions/ (Accedido: 19 de junio de 2024).

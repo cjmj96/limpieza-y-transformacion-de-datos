@@ -2,7 +2,7 @@
 
 ![airbnb-logo](airbnb-logo.png)
 
-<href="https://www.flaticon.com/free-icons/airbnb" title="iconos de airbnb"&gt;Iconos de Airbnb creados por riajulislam - Flaticon
+<a href="https://www.flaticon.com/free-icons/airbnb" title="iconos de airbnb">Iconos de Airbnb creados por riajulislam - Flaticon
 
 ## Antecedentes y visión general
 
@@ -78,6 +78,6 @@ del conjunto de datos y priorizar las áreas que necesitan atención.
 
 ## Referencias
 
-[1] Airbnb, “Inside Airbnb” Inside Airbnb. https://insideairbnb.com/ (Accedido: 14 de Mayo de 2024).
+[1] Airbnb, “Inside Airbnb” Inside Airbnb. https://insideairbnb.com/ (Accedido: 14 de mayo de 2024).
 
-[2] City of Boston, "Neighborhoods," boston.gov, Oct. 13, 2017. https://www.boston.gov/neighborhoods (Accedido: June 18, 2024).
+[2] City of Boston, "Neighborhoods," boston.gov, Oct. 13, 2017. https://www.boston.gov/neighborhoods (Accedido: 18 de junio de 2024).
