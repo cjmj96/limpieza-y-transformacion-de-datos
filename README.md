@@ -2,7 +2,7 @@
 
 ![airbnb-logo](airbnb-logo.png)
 
-href="https://www.flaticon.com/free-icons/airbnb" title="iconos de airbnb"&gt;Iconos de Airbnb creados por riajulislam - Flaticon
+<href="https://www.flaticon.com/free-icons/airbnb" title="iconos de airbnb"&gt;Iconos de Airbnb creados por riajulislam - Flaticon
 
 ## Antecedentes y visión general
 
@@ -11,22 +11,22 @@ en el espacio de alquiler vacacional.
 
 La compañía tiene cantidades masivas de información acerca de anfitriones independientes y/o alojados en sitios como Airbnb, Booking, Vrbo, TripAdvisor, etc. Esto lleva a que la recolección
 de datos desde distintas fuentes sea propenso a reducir la calidad de datos. Este proyecto realiza las tareas de limpieza y transformación de datos, en una de las fuentes de datos como lo es
-Airbnb (Boston, MA). Con el éxito en estas se asegura que los datos usados para la toma de decisiones es preciso, confiable y accionable. El informe detallado está localizado en ['documentacion'](https://github.com/cjmj96/limpieza-y-transformacion-de-datos/tree/main/documentacion).
-Los datos utilizados vienen de InsideAirbnb [1] y se pueden descargar en la [nube](https://drive.google.com/drive/folders/16q4xgEGPM-RoK31yX8wkQwENX2kmSOQA?usp=sharing).
+Airbnb (Boston, MA). Con el éxito en estas se asegura que los datos usados para la toma de decisiones es preciso, confiable y accionable. El informe detallado está localizado en [`documentacion`](https://github.com/cjmj96/limpieza-y-transformacion-de-datos/tree/main/documentacion).
+Los datos utilizados vienen de InsideAirbnb [1] y se pueden descargar en la [`nube`](https://drive.google.com/drive/folders/16q4xgEGPM-RoK31yX8wkQwENX2kmSOQA?usp=sharing).
 Las consultas SQL utilizadas para realizar todas las operaciones de limpieza están localizadas en [`codigo`](https://github.com/cjmj96/limpieza-y-transformacion-de-datos/tree/main/codigo). Este se divide en dos
-subdirectorios, ['preparacion_de_datos'](https://github.com/cjmj96/limpieza-y-transformacion-de-datos/tree/main/codigo/preparacion_de_datos)
+subdirectorios, [`preparacion_de_datos`](https://github.com/cjmj96/limpieza-y-transformacion-de-datos/tree/main/codigo/preparacion_de_datos)
 y [`comprension_de_datos`](https://github.com/cjmj96/limpieza-y-transformacion-de-datos/tree/main/codigo/comprension_de_datos) con archivos que contienen consultas realizadas en PostgreSQL. El archivo de volcado que permite recrear la base de datos en el mismo estado en que
 estaba en el momento del volcado se puede obtener en el mismo enlace dado anteriormente.
 
 ## Estructura de datos y revisiones iniciales
 
-La estructura de la base de datos de una de las fuentes de datos que usa AirAnalytics como se ve abajo, consistes en 3 tablas: 'listing', 'calendar', y 'review' con un total
+La estructura de la base de datos de una de las fuentes de datos que usa AirAnalytics como se ve abajo, consistes en 3 tablas: `listing`, `calendar` y `review` con un total
 combinado de 1,745,013 observaciones.
 
 ![erd-boston-airbnb-data](./erd-boston-airbnb-data.png)
 
 Se realizaron diferentes operaciones para la familiarización con los conjuntos datos, antes de realizar la limpieza y transformación de datos. Las consultas
-SQL utilizadas para hacer estas operaciones está localizada en ['codigo/compresion_de_datos'](https://github.com/cjmj96/limpieza-y-transformacion-de-datos/tree/main/codigo/comprension_de_datos).
+SQL utilizadas para hacer estas operaciones está localizada en [`codigo/compresion_de_datos`](https://github.com/cjmj96/limpieza-y-transformacion-de-datos/tree/main/codigo/comprension_de_datos).
 
 ## Resumen ejecutivo
 
@@ -41,23 +41,23 @@ Algunas columnas en los conjuntos de datos presentaban tipos de datos erróneos 
 
 #### Habilidad para representar valores faltantes
 
-La tabla 'listing' representaba de manera equivocada sus valores faltantes en la columna 'host_response_time', hacía uso de cadenas de caracteres 'N/A' en vez de NULL. Se sustituyeron
+La tabla `listing` representaba de manera equivocada sus valores faltantes en la columna `host_response_time`, hacía uso de cadenas de caracteres `N/A` en vez de `NULL`. Se sustituyeron
 estos valores al realizar consultas PostgreSQL.
 
 #### Consistencia de datos
 
-Los conjuntos de datos presentaba valores inconsistentes en diferentes tablas como 'listing' y 'calendar'. La tabla 'listing' presentaba en la columna 'host_neighbourhood',
+Los conjuntos de datos presentaba valores inconsistentes en diferentes tablas como `listing` y `calendar`. La tabla `listing` presentaba en la columna `host_neighbourhood`,
 124 vecindarios diferentes cuando en realidad, solo hay 24 [2]. El proceso de la identificación correcta de los vecindarios
 se llevó a cabo usando las coordenadas espaciales aproximadas de cada listado. Como resultado de eso se redujo la cantidad de vecindarios a 24. Otras columnas de la
-misma tabla y las tablas 'calendar' antes listada, presentaba datos con valores anómalos. Al realizar
-operaciones para filtrar estos datos las tablas 'listing', 'calendar' fueron reducidas en un 56.77% y 9.51%, respectivamente. Las tablas 'listing' y 'calendar' quedaron
+misma tabla y las tablas `calendar` antes listada, presentaba datos con valores anómalos. Al realizar
+operaciones para filtrar estos datos las tablas `listing`, `calendar` fueron reducidas en un 56.77% y 9.51%, respectivamente. Las tablas `listing` y `calendar` quedaron
 con 1,842 y 1,406,431 observaciones respectivamente.
 
 #### Completitud de datos
 
-El conjunto de datos presentaba datos faltantes en la tabla 'listing', específicamente en dos columnas: 'host_neighbourhood' y 'host_is_superhost', con un 2% y 3% de presencia
+El conjunto de datos presentaba datos faltantes en la tabla `listing`, específicamente en dos columnas: `host_neighbourhood` y `host_is_superhost`, con un 2% y 3% de presencia
 en las observaciones, respectivamente. Al aplicar análisis de casos completos, la cantidad de observaciones con valores faltantes se redujo a cero, resultando en una
-reducción en el conjunto de datos (tabla 'listing') de un 2%, ahora conteniendo 1,805 observaciones.
+reducción en el conjunto de datos (tabla `listing`) de un 2%, ahora conteniendo 1,805 observaciones.
 
 ## Recomendaciones y pasos futuros
 
