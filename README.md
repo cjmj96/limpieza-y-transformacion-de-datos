@@ -20,7 +20,7 @@ estaba en el momento del volcado se puede obtener en el mismo enlace dado anteri
 
 ## Estructura de datos y revisiones iniciales
 
-La estructura de la base de datos de una de las fuentes de datos que usa AirAnalytics como se ve abajo, consistes en 3 tablas: `listing`, `calendar` y `review` con un total
+La estructura de la base de datos de una de las fuentes de datos que usa AirAnalytics como se ve abajo, consiste de 3 tablas: `listing`, `calendar` y `review` con un total
 combinado de 1,745,013 observaciones.
 
 ![erd-boston-airbnb-data](./erd-boston-airbnb-data.png)
